@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+@import "tailwindcss";
+
+@theme {
+  --color-blue: hsl(192, 91%, 37%);
+  --color-red: hsl(0, 70%, 36%);
+  --color-purple: hsl(246, 45%, 63%);
+  --color-green: hsl(105, 30%, 43%);
+  --color-pink: hsl(309, 44%, 57%);
+  --color-orange: hsl(32, 66%, 54%);
+}
