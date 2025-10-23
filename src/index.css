@@ -9,4 +9,8 @@
   --color-green: hsl(105, 30%, 43%);
   --color-pink: hsl(309, 44%, 57%);
   --color-orange: hsl(32, 66%, 54%);
+  --font-roboto: roboto, sans-serif;
+  --font-playfair-display: playfair display, sans-serif;
+  --bg-height: 6.25rem;
+  --bg-width: 100%;
 }

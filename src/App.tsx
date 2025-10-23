@@ -7,8 +7,8 @@ function App() {
         <Container>
           <Header />
           <Main />
-          <Footer />
         </Container>
+        <Footer />
       </Wrapper>
     </>
   );
