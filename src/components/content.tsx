@@ -271,7 +271,12 @@ export const Footer = () => {
               />
             </ul>
           </div>
-          <img src={footerImage} className="md:w-1/3" alt="footer image" />
+          <img
+            loading="lazy"
+            src={footerImage}
+            className="md:w-1/3"
+            alt="footer image"
+          />
         </div>
       </footer>
     </>
