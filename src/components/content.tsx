@@ -55,8 +55,8 @@ export const Main = () => {
           My work
         </h2>
         <ul className="flex flex-col gap-16 md:grid md:grid-cols-2 md:grid-rows-3 lg:grid-cols-3 lg:grid-rows-2">
-          {colors.map((i) => (
-            <Project color={i} />
+          {colors.map((i, index) => (
+            <Project key={index} color={i} />
           ))}
         </ul>
       </main>
@@ -71,8 +71,8 @@ export const Header = () => {
     return (
       <>
         <header className="relative flex items-center">
-          <div className="relative flex h-120 flex-col justify-center overflow-hidden">
-            <img src={headerImage} alt="header image" />
+          <div className="relative flex h-120 flex-col justify-center overflow-hidden bg-black">
+            <img src={headerImage} alt="Ashley Williams typing on a laptop" />
             <h1 className="font-playfair-display absolute bottom-0 w-full px-4 pb-3 text-center text-6xl text-white">
               Ashley Williams
             </h1>
@@ -94,7 +94,7 @@ export const Header = () => {
             <div className="relative float-left -mt-48 mr-5 -ml-12 h-103.75 w-1/2">
               <img
                 src={headerImageTablet}
-                alt="Ashley Williams"
+                alt="Ashley Williams typing on a laptop"
                 className="absolute inset-0 h-full w-full object-cover"
               />
             </div>
@@ -120,7 +120,11 @@ export const Header = () => {
     <>
       <header className="relative flex flex-col gap-4">
         <div className="relative flex flex-col">
-          <img aria-hidden="true" src={headerImage} alt="header image" />
+          <img
+            aria-hidden="true"
+            src={headerImage}
+            alt="Ashley Williams typing on a laptop"
+          />
           <h1 className="font-playfair-display absolute bottom-0 w-full px-4 pb-2 text-left text-7xl text-white">
             Ashley Williams
           </h1>
@@ -139,7 +143,7 @@ const Content = () => {
           About me
         </h2>
         <div className="flex flex-col gap-2 lg:gap-4">
-          <p className="font-roboto">
+          <p aria-label="main paragraph" className="font-roboto">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
             debitis minus ad expedita, quam libero optio placeat distinctio non
             accusantium at error ex repudiandae fugit, doloribus ab quos
@@ -148,7 +152,10 @@ const Content = () => {
             eum minima vel corporis veritatis veniam, in dolorem perferendis
             consequatur dolore! Illum fuga at aspernatur?
           </p>
-          <ul className="flex justify-center gap-4 lg:justify-end">
+          <ul
+            aria-label="links list"
+            className="flex justify-center gap-4 lg:justify-end"
+          >
             <ContentLink
               ariaLabel="github link"
               element={
@@ -201,6 +208,7 @@ const ContentLink = ({
           aria-label={ariaLabel}
           className="outline-offset-4 outline-black"
           target="_blank"
+          role="link"
           href=""
         >
           {element}
@@ -231,6 +239,7 @@ const Project = ({ color }: { color: string }) => {
                 aria-label="link to github"
                 className="outline-offset-4"
                 target="_blank"
+                role="link"
                 href=""
               >
                 <img
@@ -245,6 +254,7 @@ const Project = ({ color }: { color: string }) => {
                 className="outline-offset-4"
                 target="_blank"
                 href=""
+                role="link"
               >
                 <ExternalLink aria-hidden="true" className="size-6" />
               </a>
@@ -327,7 +337,7 @@ export const Footer = () => {
             loading="lazy"
             src={footerImage}
             className="md:w-1/3"
-            alt="footer image"
+            alt="ashley williams typing on a laptop"
           />
         </div>
       </footer>
