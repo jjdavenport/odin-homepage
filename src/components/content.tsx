@@ -1,5 +1,5 @@
 import { ExternalLink, Twitter, Phone, Mail } from "lucide-react";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import footerImage from "../assets/461651565_2309674672719173_6514120453975065192__n.jpg";
 import headerImage from "../assets/pexels-shvetsa-5711949.jpg";
 import headerImageTablet from "../assets/pexels-artempodrez-4492216.jpg";
@@ -67,12 +67,31 @@ export const Main = () => {
 export const Header = () => {
   const desktop = useMediaQuery({ minWidth: 1024 });
   const tablet = useMediaQuery({ minWidth: 768 });
+  const [loaded, setLoaded] = useState({
+    mobile: false,
+    tablet: false,
+    desktop: false,
+  });
+
   if (desktop) {
     return (
       <>
         <header className="relative flex items-center">
-          <div className="relative flex h-120 flex-col justify-center overflow-hidden bg-black">
-            <img src={headerImage} alt="Ashley Williams typing on a laptop" />
+          <div className="bg-header relative flex h-120 flex-col justify-center overflow-hidden bg-cover bg-center bg-no-repeat">
+            <div
+              className={`bg-header absolute inset-0 bg-cover bg-center bg-no-repeat filter transition-all duration-700 ${
+                loaded.desktop
+                  ? "opacity-0 blur-none"
+                  : "scale-105 opacity-100 blur-xl"
+              }`}
+            />
+            <img
+              onLoad={() => setLoaded((prev) => ({ ...prev, desktop: true }))}
+              aria-hidden="true"
+              src={headerImage}
+              alt="Ashley Williams typing on a laptop"
+              className={`${loaded.desktop ? "opacity-100" : "opacity-0"} transition-opacity duration-700`}
+            />
             <h1 className="font-playfair-display absolute bottom-0 w-full px-4 pb-3 text-center text-6xl text-white">
               Ashley Williams
             </h1>
@@ -85,45 +104,61 @@ export const Header = () => {
 
   if (tablet) {
     return (
-      <>
-        <header className="relative bg-transparent">
-          <h1 className="font-playfair-display absolute top-4 right-0 z-30 text-7xl text-white">
-            Ashley Williams
-          </h1>
-          <div className="relative mt-28 bg-white p-10 py-20 shadow-2xl">
-            <div className="relative float-left -mt-48 mr-5 -ml-12 h-103.75 w-1/2">
-              <img
-                src={headerImageTablet}
-                alt="Ashley Williams typing on a laptop"
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-            </div>
-            <h2 className="font-playfair-display mb-6 text-center text-4xl">
-              About me
-            </h2>
-            <p className="font-roboto text-lg leading-relaxed text-gray-800">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
-              debitis minus ad expedita, quam libero optio placeat distinctio
-              non accusantium at error ex repudiandae fugit, doloribus ab quos
-              voluptatum. Consequatur. Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Quo quisquam repellendus reiciendis hic quas
-              ullam eum minima vel corporis veritatis veniam, in dolorem
-              perferendis consequatur dolore! Illum fuga at aspernatur?
-            </p>
+      <header className="bg-transparent">
+        <h1 className="font-playfair-display absolute top-4 right-0 z-30 text-7xl text-white">
+          Ashley Williams
+        </h1>
+        <div className="mt-28 bg-white p-10 py-20 shadow-2xl">
+          <div className="relative float-left -mt-48 mr-5 -ml-12 h-119.75 w-1/2 overflow-hidden">
+            <div
+              className={`bg-header-tablet absolute inset-0 bg-cover bg-center bg-no-repeat filter transition-all duration-700 ${
+                loaded.tablet
+                  ? "opacity-0 blur-none"
+                  : "scale-105 opacity-100 blur-xl"
+              }`}
+            />
+            <img
+              aria-hidden="true"
+              onLoad={() => setLoaded((prev) => ({ ...prev, tablet: true }))}
+              src={headerImageTablet}
+              alt="Ashley Williams typing on a laptop"
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+                loaded.tablet ? "opacity-100" : "opacity-0"
+              }`}
+            />
           </div>
-        </header>
-      </>
+          <h2 className="font-playfair-display mb-6 text-center text-4xl">
+            About me
+          </h2>
+          <p className="font-roboto text-lg leading-relaxed text-gray-800">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
+            debitis minus ad expedita, quam libero optio placeat distinctio non
+            accusantium at error ex repudiandae fugit, doloribus ab quos
+            voluptatum. Consequatur. Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Quo quisquam repellendus reiciendis hic quas ullam
+            eum minima vel corporis veritatis veniam, in dolorem perferendis
+            consequatur dolore! Illum fuga at aspernatur?
+          </p>
+        </div>
+      </header>
     );
   }
 
   return (
     <>
       <header className="relative flex flex-col gap-4">
-        <div className="relative flex flex-col">
+        <div className="relative flex min-h-111 flex-col">
+          <div
+            className={`bg-header absolute inset-0 bg-cover bg-center bg-no-repeat filter transition-all duration-700 ${
+              loaded.mobile ? "opacity-0 blur-none" : "opacity-100 blur-xl"
+            }`}
+          />
           <img
+            onLoad={() => setLoaded((prev) => ({ ...prev, mobile: true }))}
             aria-hidden="true"
             src={headerImage}
             alt="Ashley Williams typing on a laptop"
+            className={`${loaded.mobile ? "opacity-100" : "opacity-0"} transition-opacity duration-700`}
           />
           <h1 className="font-playfair-display absolute bottom-0 w-full px-4 pb-2 text-left text-7xl text-white">
             Ashley Williams
@@ -332,13 +367,14 @@ export const Footer = () => {
               />
             </ul>
           </div>
-          <img
-            aria-hidden="true"
-            loading="lazy"
-            src={footerImage}
-            className="md:w-1/3"
-            alt="ashley williams typing on a laptop"
-          />
+          <div className="bg-footer bg-contain bg-no-repeat md:w-1/3">
+            <img
+              aria-hidden="true"
+              loading="lazy"
+              src={footerImage}
+              alt="ashley williams typing on a laptop"
+            />
+          </div>
         </div>
       </footer>
     </>
