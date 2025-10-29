@@ -1,8 +1,14 @@
 import { ExternalLink, Twitter, Phone, Mail } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import footerImage from "../assets/461651565_2309674672719173_6514120453975065192__n.jpg";
+import footerImageWebp from "../assets/461651565_2309674672719173_6514120453975065192__n.webp";
+import footerImageAvif from "../assets/461651565_2309674672719173_6514120453975065192__n.avif";
 import headerImage from "../assets/pexels-shvetsa-5711949.jpg";
+import headerImageWebp from "../assets/pexels-shvetsa-5711949.webp";
+import headerImageAvif from "../assets/pexels-shvetsa-5711949.avif";
 import headerImageTablet from "../assets/pexels-artempodrez-4492216.jpg";
+import headerImageTabletWebp from "../assets/pexels-artempodrez-4492216.webp";
+import headerImageTabletAvif from "../assets/pexels-artempodrez-4492216.avif";
 import github from "../assets/github-142-svgrepo-com.svg";
 import linkedin from "../assets/linkedin-svgrepo-com.svg";
 import { useMediaQuery } from "react-responsive";
@@ -77,7 +83,7 @@ export const Header = () => {
     return (
       <>
         <header className="relative flex items-center">
-          <div className="bg-header relative flex h-120 flex-col justify-center overflow-hidden bg-cover bg-center bg-no-repeat">
+          <div className="bg-header relative flex h-120 min-w-120 flex-col justify-center overflow-hidden bg-cover bg-center bg-no-repeat">
             <div
               className={`bg-header absolute inset-0 bg-cover bg-center bg-no-repeat filter transition-all duration-700 ${
                 loaded.desktop
@@ -85,13 +91,17 @@ export const Header = () => {
                   : "scale-105 opacity-100 blur-xl"
               }`}
             />
-            <img
-              onLoad={() => setLoaded((prev) => ({ ...prev, desktop: true }))}
-              aria-hidden="true"
-              src={headerImage}
-              alt="Ashley Williams typing on a laptop"
-              className={`${loaded.desktop ? "opacity-100" : "opacity-0"} transition-opacity duration-700`}
-            />
+            <picture>
+              <source type="image/avif" srcSet={headerImageAvif} />
+              <source type="image/webp" srcSet={headerImageWebp} />
+              <img
+                onLoad={() => setLoaded((prev) => ({ ...prev, desktop: true }))}
+                aria-hidden="true"
+                src={headerImage}
+                alt="Ashley Williams typing on a laptop"
+                className={`${loaded.desktop ? "opacity-100" : "opacity-0"} transition-opacity duration-700`}
+              />
+            </picture>
             <h1 className="font-playfair-display absolute bottom-0 w-full px-4 pb-3 text-center text-6xl text-white">
               Ashley Williams
             </h1>
@@ -105,7 +115,7 @@ export const Header = () => {
   if (tablet) {
     return (
       <header className="bg-transparent">
-        <h1 className="font-playfair-display absolute top-4 right-0 z-30 text-7xl text-white">
+        <h1 className="font-playfair-display absolute top-6 right-6 z-30 text-7xl text-white">
           Ashley Williams
         </h1>
         <div className="mt-28 bg-white p-10 py-20 shadow-2xl">
@@ -117,15 +127,19 @@ export const Header = () => {
                   : "scale-105 opacity-100 blur-xl"
               }`}
             />
-            <img
-              aria-hidden="true"
-              onLoad={() => setLoaded((prev) => ({ ...prev, tablet: true }))}
-              src={headerImageTablet}
-              alt="Ashley Williams typing on a laptop"
-              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
-                loaded.tablet ? "opacity-100" : "opacity-0"
-              }`}
-            />
+            <picture>
+              <source type="image/avif" srcSet={headerImageTabletAvif} />
+              <source type="image/webp" srcSet={headerImageTabletWebp} />
+              <img
+                aria-hidden="true"
+                onLoad={() => setLoaded((prev) => ({ ...prev, tablet: true }))}
+                src={headerImageTablet}
+                alt="Ashley Williams typing on a laptop"
+                className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+                  loaded.tablet ? "opacity-100" : "opacity-0"
+                }`}
+              />
+            </picture>
           </div>
           <h2 className="font-playfair-display mb-6 text-center text-4xl">
             About me
@@ -368,12 +382,16 @@ export const Footer = () => {
             </ul>
           </div>
           <div className="bg-footer bg-contain bg-no-repeat md:w-1/3">
-            <img
-              aria-hidden="true"
-              loading="lazy"
-              src={footerImage}
-              alt="ashley williams typing on a laptop"
-            />
+            <picture>
+              <source type="image/avif" srcSet={footerImageAvif} />
+              <source type="image/webp" srcSet={footerImageWebp} />
+              <img
+                aria-hidden="true"
+                loading="lazy"
+                src={footerImage}
+                alt="ashley williams typing on a laptop"
+              />
+            </picture>
           </div>
         </div>
       </footer>
