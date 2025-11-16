@@ -12,6 +12,7 @@ import headerImageTabletAvif from "../assets/pexels-artempodrez-4492216.avif";
 import github from "../assets/github-142-svgrepo-com.svg";
 import linkedin from "../assets/linkedin-svgrepo-com.svg";
 import { useMediaQuery } from "react-responsive";
+import { Blurhash as BlurHash } from "react-blurhash";
 
 export const Wrapper = ({ children }: { children: ReactNode }) => (
   <div className="relative">
@@ -83,15 +84,21 @@ export const Header = () => {
     return (
       <>
         <header className="relative flex items-center">
-          <div className="bg-header relative flex h-120 min-w-120 flex-col justify-center overflow-hidden bg-cover bg-center bg-no-repeat">
+          <div className="relative h-120 min-w-120 flex-col justify-center overflow-hidden">
             <div
-              className={`bg-header absolute inset-0 bg-cover bg-center bg-no-repeat filter transition-all duration-700 ${
-                loaded.desktop
-                  ? "opacity-0 blur-none"
-                  : "scale-105 opacity-100 blur-xl"
-              }`}
-            />
-            <picture>
+              className="absolute inset-0 transition-opacity duration-700"
+              style={{ opacity: loaded.desktop ? 0 : 1 }}
+            >
+              <BlurHash
+                hash="L38D@H00x^Ne00~qIAE100X.IA?G"
+                width="100%"
+                height="100%"
+                resolutionX={32}
+                resolutionY={32}
+                punch={1}
+              />
+            </div>
+            <picture className="absolute inset-0 h-full w-full">
               <source type="image/avif" srcSet={headerImageAvif} />
               <source type="image/webp" srcSet={headerImageWebp} />
               <img
@@ -99,7 +106,8 @@ export const Header = () => {
                 aria-hidden="true"
                 src={headerImage}
                 alt="Ashley Williams typing on a laptop"
-                className={`${loaded.desktop ? "opacity-100" : "opacity-0"} transition-opacity duration-700`}
+                className="h-full w-full object-cover transition-opacity duration-700"
+                style={{ opacity: loaded.desktop ? 1 : 0 }}
               />
             </picture>
             <h1 className="font-playfair-display absolute bottom-0 w-full px-4 pb-3 text-center text-6xl text-white">
@@ -120,13 +128,16 @@ export const Header = () => {
         </h1>
         <div className="mt-28 bg-white p-10 py-20 shadow-2xl">
           <div className="relative float-left -mt-48 mr-5 -ml-12 h-119.75 w-1/2 overflow-hidden">
-            <div
-              className={`bg-header-tablet absolute inset-0 bg-cover bg-center bg-no-repeat filter transition-all duration-700 ${
-                loaded.tablet
-                  ? "opacity-0 blur-none"
-                  : "scale-105 opacity-100 blur-xl"
-              }`}
-            />
+            <div className={`absolute inset-0`}>
+              <BlurHash
+                hash="L2A0gu0000~p01={D*_301?u~V00"
+                width="100%"
+                height="100%"
+                resolutionX={32}
+                resolutionY={32}
+                punch={1}
+              />
+            </div>
             <picture>
               <source type="image/avif" srcSet={headerImageTabletAvif} />
               <source type="image/webp" srcSet={headerImageTabletWebp} />
@@ -161,19 +172,32 @@ export const Header = () => {
   return (
     <>
       <header className="relative flex flex-col gap-4">
-        <div className="relative flex min-h-111 flex-col">
+        <div className="relative flex aspect-2/3 w-full flex-col">
           <div
-            className={`bg-header absolute inset-0 bg-cover bg-center bg-no-repeat filter transition-all duration-700 ${
-              loaded.mobile ? "opacity-0 blur-none" : "opacity-100 blur-xl"
-            }`}
-          />
-          <img
-            onLoad={() => setLoaded((prev) => ({ ...prev, mobile: true }))}
-            aria-hidden="true"
-            src={headerImage}
-            alt="Ashley Williams typing on a laptop"
-            className={`${loaded.mobile ? "opacity-100" : "opacity-0"} transition-opacity duration-700`}
-          />
+            className="absolute inset-0 transition-opacity duration-700"
+            style={{ opacity: loaded.mobile ? 0 : 1 }}
+          >
+            <BlurHash
+              hash="L48Na@00tlNe00_4MxIo01XnMx-p"
+              width="100%"
+              height="100%"
+              resolutionX={32}
+              resolutionY={32}
+              punch={1}
+            />
+          </div>
+          <picture className="absolute inset-0 h-full w-full">
+            <source type="image/avif" srcSet={headerImageAvif} />
+            <source type="image/webp" srcSet={headerImageWebp} />
+            <img
+              onLoad={() => setLoaded((prev) => ({ ...prev, mobile: true }))}
+              aria-hidden="true"
+              src={headerImage}
+              alt="Ashley Williams typing on a laptop"
+              className="h-full w-full object-cover transition-opacity duration-700"
+              style={{ opacity: loaded.mobile ? 1 : 0 }}
+            />
+          </picture>
           <h1 className="font-playfair-display absolute bottom-0 w-full px-4 pb-2 text-left text-7xl text-white">
             Ashley Williams
           </h1>
