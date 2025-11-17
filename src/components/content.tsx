@@ -85,10 +85,7 @@ export const Header = () => {
       <>
         <header className="relative flex items-center">
           <div className="relative h-120 min-w-120 flex-col justify-center overflow-hidden">
-            <div
-              className="absolute inset-0 transition-opacity duration-700"
-              style={{ opacity: loaded.desktop ? 0 : 1 }}
-            >
+            <div className="absolute inset-0">
               <BlurHash
                 hash="L38D@H00x^Ne00~qIAE100X.IA?G"
                 width="100%"
@@ -106,8 +103,7 @@ export const Header = () => {
                 aria-hidden="true"
                 src={headerImage}
                 alt="Ashley Williams typing on a laptop"
-                className="h-full w-full object-cover transition-opacity duration-700"
-                style={{ opacity: loaded.desktop ? 1 : 0 }}
+                className={`${loaded.desktop ? "opacity-100" : "opacity-0"} h-full w-full object-cover transition-opacity duration-500`}
               />
             </picture>
             <h1 className="font-playfair-display absolute bottom-0 w-full px-4 pb-3 text-center text-6xl text-white">
@@ -128,7 +124,7 @@ export const Header = () => {
         </h1>
         <div className="mt-28 bg-white p-10 py-20 shadow-2xl">
           <div className="relative float-left -mt-48 mr-5 -ml-12 h-119.75 w-1/2 overflow-hidden">
-            <div className={`absolute inset-0`}>
+            <div className="absolute inset-0">
               <BlurHash
                 hash="L2A0gu0000~p01={D*_301?u~V00"
                 width="100%"
@@ -146,7 +142,7 @@ export const Header = () => {
                 onLoad={() => setLoaded((prev) => ({ ...prev, tablet: true }))}
                 src={headerImageTablet}
                 alt="Ashley Williams typing on a laptop"
-                className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+                className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
                   loaded.tablet ? "opacity-100" : "opacity-0"
                 }`}
               />
@@ -173,10 +169,7 @@ export const Header = () => {
     <>
       <header className="relative flex flex-col gap-4">
         <div className="relative flex aspect-2/3 w-full flex-col">
-          <div
-            className="absolute inset-0 transition-opacity duration-700"
-            style={{ opacity: loaded.mobile ? 0 : 1 }}
-          >
+          <div className="absolute inset-0">
             <BlurHash
               hash="L48Na@00tlNe00_4MxIo01XnMx-p"
               width="100%"
@@ -194,8 +187,7 @@ export const Header = () => {
               aria-hidden="true"
               src={headerImage}
               alt="Ashley Williams typing on a laptop"
-              className="h-full w-full object-cover transition-opacity duration-700"
-              style={{ opacity: loaded.mobile ? 1 : 0 }}
+              className={`${loaded.mobile ? "opacity-100" : "opacity-0"} h-full w-full object-cover transition-opacity duration-500`}
             />
           </picture>
           <h1 className="font-playfair-display absolute bottom-0 w-full px-4 pb-2 text-left text-7xl text-white">
@@ -344,10 +336,11 @@ const Project = ({ color }: { color: string }) => {
 };
 
 export const Footer = () => {
+  const [loaded, setLoaded] = useState(false);
   return (
     <>
       <footer className="bg-blue flex w-full flex-col items-center">
-        <div className="flex max-w-6xl flex-col md:flex-row md:p-10">
+        <div className="flex w-full max-w-6xl flex-col md:flex-row md:p-10">
           <div className="flex flex-col gap-6 px-6 pt-8 pb-20 md:w-2/3 md:justify-center md:px-0 md:pt-0 md:pb-0">
             <h3 className="font-playfair-display text-center text-5xl text-white md:text-left">
               Contact me
@@ -405,15 +398,28 @@ export const Footer = () => {
               />
             </ul>
           </div>
-          <div className="bg-footer bg-contain bg-no-repeat md:w-1/3">
-            <picture>
+          <div className="relative aspect-3/4 overflow-hidden md:w-1/3">
+            <div className="absolute inset-0 h-full w-full">
+              <BlurHash
+                hash="LSGuzR%$IAn~_N%MRPf+D%xZNHR*"
+                width="100%"
+                height="100%"
+                resolutionX={32}
+                resolutionY={32}
+                punch={1}
+                className="h-full w-full object-cover"
+              />
+            </div>
+
+            <picture className="absolute inset-0 h-full w-full">
               <source type="image/avif" srcSet={footerImageAvif} />
               <source type="image/webp" srcSet={footerImageWebp} />
               <img
-                aria-hidden="true"
+                onLoad={() => setLoaded(true)}
                 loading="lazy"
                 src={footerImage}
                 alt="ashley williams typing on a laptop"
+                className={`h-full w-full object-cover transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"} `}
               />
             </picture>
           </div>
